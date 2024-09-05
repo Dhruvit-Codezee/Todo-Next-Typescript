@@ -37,7 +37,6 @@ export default function AddTodo() {
 
   useEffect(() => {
     const storedData: string = localStorage.getItem("data") || "";
-    console.log("storedData", storedData);
     if (storedData) {
       const parsedData: IUser[] = JSON.parse(storedData);
       setTodoAry(parsedData);
@@ -54,8 +53,6 @@ export default function AddTodo() {
         setNewAry([...newAry, newTodo]);
         setTodoObj({ id: "", name: "", completed: false });
         localStorage.setItem("data", JSON.stringify([...todoAry, newTodo]));
-        console.log("todoAry", todoAry);
-        console.log("newAry", newAry);
       }
     },
     [newAry, todoAry, todoObj]
@@ -68,20 +65,18 @@ export default function AddTodo() {
       setTodoAry(newAry);
       setNewAry(newAry);
       localStorage.setItem("data", JSON.stringify(newAry));
-      console.log("newAry", newAry);
     },
     [todoAry]
   );
 
   const handleCheckChange = useCallback(
-    (todo: IUser) => {
+    (todo: IUser, e: React.ChangeEvent<HTMLInputElement>) => {
       let newAry = [...todoAry];
       const i: number = newAry?.findIndex((item) => item?.id === todo?.id);
       newAry[i] = { ...newAry[i], completed: !todo?.completed };
       setTodoAry(newAry);
       setNewAry(newAry);
       localStorage.setItem("data", JSON.stringify(newAry));
-      console.log("newAry_check", newAry);
     },
     [todoAry]
   );
@@ -107,5 +102,5 @@ export default function AddTodo() {
       </form>
       <TodoList todos={newAry} onDelete={handleDelete} onCheckChange={handleCheckChange} />
     </div>
-    );
+  );
 }

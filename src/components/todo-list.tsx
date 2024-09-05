@@ -9,7 +9,7 @@ interface IUser {
 interface TodoListProps {
   todos: IUser[];
   onDelete: (todo: IUser) => void;
-  onCheckChange: (todo: IUser) => void;
+  onCheckChange: (todo: IUser, e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function TodoList(props: TodoListProps) {
@@ -27,7 +27,7 @@ export default function TodoList(props: TodoListProps) {
               type="checkbox"
               name="completed"
               checked={item.completed}
-              onChange={() => onCheckChange(item)}
+              onChange={(e) => onCheckChange(item, e)}
               className="h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
             />
             <span className={`text-lg font-medium ${item.completed ? "line-through text-gray-400" : "text-gray-700"}`}>
