@@ -45,7 +45,7 @@ export default function AddTodo() {
   }, []);
 
   const handleSubmit = useCallback(
-    (e: React.FormEvent) => {
+    (e: React.FormEvent): void => {
       e.preventDefault();
       if (todoObj?.name) {
         const newTodo = { ...todoObj, id: Math.random().toString(36).substr(2, 9) };
@@ -59,7 +59,7 @@ export default function AddTodo() {
   );
 
   const handleDelete = useCallback(
-    (todo: IUser) => {
+    (todo: IUser): void => {
       let newAry = [...todoAry];
       newAry = newAry?.filter((item) => item.id !== todo.id);
       setTodoAry(newAry);
@@ -70,7 +70,7 @@ export default function AddTodo() {
   );
 
   const handleCheckChange = useCallback(
-    (todo: IUser, e: React.ChangeEvent<HTMLInputElement>) => {
+    (todo: IUser, e: React.ChangeEvent<HTMLInputElement>): void => {
       let newAry = [...todoAry];
       const i: number = newAry?.findIndex((item) => item?.id === todo?.id);
       newAry[i] = { ...newAry[i], completed: !todo?.completed };
